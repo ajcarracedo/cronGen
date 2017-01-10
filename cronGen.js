@@ -1,5 +1,3 @@
-﻿
-
 (function ($) {
     
     var resultsName = "";
@@ -212,7 +210,7 @@
                 $('#CronGenTabs a').click(function (e) {
                     e.preventDefault();
                     $(this).tab('show');
-                    //generate();
+                    generate();
                 });
                 $("#CronGenMainDiv select, #CronGenMainDiv input").change(function (e) {
                     generate();
@@ -220,9 +218,25 @@
             });
             return;
         }
+        ,
+        update: function (newCron) {
+
+            var that = $(this);
+
+
+            inputElement = that;
+            displayElement = $("input[placeholder='Cron trigger']").val(newCron);
+
+
+            // Update original control
+            inputElement.val(newCron).change();
+            // Update display
+            displayElement.val(newCron);
+
+            return;
+        }
     });
     
-
     var fillInMonths = function () {
         var days = [
             { text: "January", val: "1" },
@@ -242,7 +256,6 @@
             fillOptions(this, days);
         });
     };
-
     var fillOptions = function (elements, options) {
         for (var i = 0; i < options.length; i++)
             $(elements).append("<option value='" + options[i].val + "'>" + options[i].text + "</option>");
@@ -354,4 +367,3 @@
     };
 
 })(jQuery);
-
